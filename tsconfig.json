@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+		"module": "commonjs",
+		"moduleResolution": "node",
+        "outDir": "./output",
+        "sourceMap": true,
+        "lib" : [ "webworker", "es2015" ]
+    },
+    "exclude": [
+		"node_modules"
+	]
+}
