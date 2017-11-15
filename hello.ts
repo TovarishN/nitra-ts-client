@@ -6,12 +6,13 @@ import * as crypto from 'crypto';
 import * as childProcess from 'child_process';
 import { Serialize } from './NitraSerialize';
 import { createPipe } from './NamedPipe';
-
+import {rule} from './rule';
 
 (async function main() {
 	console.log('hello world');
 
 	try {
+		rule();
 		let key = crypto.randomBytes(16).toString('hex');
 		let name = `aaa-${key}`;
 		let cp = childProcess.spawn(`D:/work/nitra/nitra/bin/Debug/Stage1/Nitra.ClientServer.Server.exe`, [name], { shell: true, detached: true });

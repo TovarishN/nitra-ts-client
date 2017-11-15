@@ -1,9 +1,6 @@
 import * as Msg from './NitraMessages';
 import Int64 = require('node-int64');
-export type DesFun = (buf: Buffer, stack: DesFun[]) => void;
-function cast<To extends Msg.Message>(obj: Msg.Message) : To {
-    return <To>obj;
-}
+import { DesFun, GetStringArrayDeserializer, cast } from './deserializers';
 
 export function GetDeserializer(msg: Msg.Message): DesFun[] {
     let retStack: DesFun[] = [];
@@ -121,8 +118,7 @@ retStack.push((buf,stack) => {
 let length = buf.readInt32LE(0);
 				msg.changes = [];
 				for (let i = 0; i < length; i++) {
-                    stack.push((bu, st) => {});
-					stack.push((bu, st) => { msg.changes[i] = bu.toString(); });
+					stack.push(...GetDeserializer(msg.changes[i]));
 				} });
 
 msg.caretPos = cast<Msg.VersionedPos>(<Msg.Message>{ MsgId: 62 }); retStack.push(...GetDeserializer(msg.caretPos));
@@ -185,8 +181,7 @@ retStack.push((buf,stack) => {
 let length = buf.readInt32LE(0);
 				msg.libs = [];
 				for (let i = 0; i < length; i++) {
-                    stack.push((bu, st) => {});
-					stack.push((bu, st) => { msg.libs[i] = bu.toString(); });
+					stack.push(...GetStringArrayDeserializer(msg.libs, i));
 				} });
 ;
  return retStack;
@@ -196,8 +191,7 @@ retStack.push((buf,stack) => {
 let length = buf.readInt32LE(0);
 				msg.libs = [];
 				for (let i = 0; i < length; i++) {
-                    stack.push((bu, st) => {});
-					stack.push((bu, st) => { msg.libs[i] = bu.toString(); });
+					stack.push(...GetStringArrayDeserializer(msg.libs, i));
 				} });
 ;
  return retStack;
@@ -207,8 +201,7 @@ retStack.push((buf,stack) => {
 let length = buf.readInt32LE(0);
 				msg.libs = [];
 				for (let i = 0; i < length; i++) {
-                    stack.push((bu, st) => {});
-					stack.push((bu, st) => { msg.libs[i] = bu.toString(); });
+					stack.push(...GetStringArrayDeserializer(msg.libs, i));
 				} });
 ;
  return retStack;
@@ -219,8 +212,7 @@ retStack.push((buf,stack) => {
 let length = buf.readInt32LE(0);
 				msg.languageNames = [];
 				for (let i = 0; i < length; i++) {
-                    stack.push((bu, st) => {});
-					stack.push((bu, st) => { msg.languageNames[i] = bu.toString(); });
+					stack.push(...GetStringArrayDeserializer(msg.languageNames, i));
 				} });
 ;
  return retStack;
@@ -250,8 +242,7 @@ retStack.push((buf,stack) => {
 let length = buf.readInt32LE(0);
 				msg.kinds = [];
 				for (let i = 0; i < length; i++) {
-                    stack.push((bu, st) => {});
-					stack.push((bu, st) => { msg.kinds[i] = bu.toString(); });
+					stack.push(...GetStringArrayDeserializer(msg.kinds, i));
 				} });
 ;
  return retStack;
@@ -345,8 +336,7 @@ retStack.push((buf,stack) => {
 let length = buf.readInt32LE(0);
 				msg.fileExtensions = [];
 				for (let i = 0; i < length; i++) {
-                    stack.push((bu, st) => {});
-					stack.push((bu, st) => { msg.fileExtensions[i] = bu.toString(); });
+					stack.push(...GetStringArrayDeserializer(msg.fileExtensions, i));
 				} });
 ;
  return retStack;
@@ -579,8 +569,7 @@ retStack.push((buf,stack) => {
 let length = buf.readInt32LE(0);
 				msg.completionList = [];
 				for (let i = 0; i < length; i++) {
-                    stack.push((bu, st) => {});
-					stack.push((bu, st) => { msg.completionList[i] = bu.toString(); });
+					stack.push(...GetDeserializer(msg.completionList[i]));
 				} });
 ;
  return retStack;
@@ -601,8 +590,7 @@ retStack.push((buf,stack) => {
 let length = buf.readInt32LE(0);
 				msg.Modules = [];
 				for (let i = 0; i < length; i++) {
-                    stack.push((bu, st) => {});
-					stack.push((bu, st) => { msg.Modules[i] = bu.toString(); });
+					stack.push(...GetStringArrayDeserializer(msg.Modules, i));
 				} });
 ;
  return retStack;
@@ -612,8 +600,7 @@ retStack.push((buf,stack) => {
 let length = buf.readInt32LE(0);
 				msg.ProjectSupprts = [];
 				for (let i = 0; i < length; i++) {
-                    stack.push((bu, st) => {});
-					stack.push((bu, st) => { msg.ProjectSupprts[i] = bu.toString(); });
+					stack.push(...GetStringArrayDeserializer(msg.ProjectSupprts, i));
 				} });
 
 retStack.push((buf,stack) => {
@@ -759,8 +746,7 @@ retStack.push((buf,stack) => {
 let length = buf.readInt32LE(0);
 				msg.References = [];
 				for (let i = 0; i < length; i++) {
-                    stack.push((bu, st) => {});
-					stack.push((bu, st) => { msg.References[i] = bu.toString(); });
+					stack.push(...GetStringArrayDeserializer(msg.References, i));
 				} });
 ;
  return retStack;
@@ -859,8 +845,7 @@ retStack.push((buf,stack) => {
 let length = buf.readInt32LE(0);
 				msg.items = [];
 				for (let i = 0; i < length; i++) {
-                    stack.push((bu, st) => {});
-					stack.push((bu, st) => { msg.items[i] = bu.toString(); });
+					stack.push(...GetDeserializer(msg.items[i]));
 				} });
 ;
  return retStack;
@@ -878,8 +863,7 @@ retStack.push((buf,stack) => {
 let length = buf.readInt32LE(0);
 				msg.items = [];
 				for (let i = 0; i < length; i++) {
-                    stack.push((bu, st) => {});
-					stack.push((bu, st) => { msg.items[i] = bu.toString(); });
+					stack.push(...GetDeserializer(msg.items[i]));
 				} });
 ;
  return retStack;
@@ -950,8 +934,7 @@ retStack.push((buf,stack) => {
 let length = buf.readInt32LE(0);
 				msg.items = [];
 				for (let i = 0; i < length; i++) {
-                    stack.push((bu, st) => {});
-					stack.push((bu, st) => { msg.items[i] = bu.toString(); });
+					stack.push(...GetDeserializer(msg.items[i]));
 				} });
 
 retStack.push((buf,stack) => {
@@ -971,8 +954,7 @@ retStack.push((buf,stack) => {
 let length = buf.readInt32LE(0);
 				msg.items = [];
 				for (let i = 0; i < length; i++) {
-                    stack.push((bu, st) => {});
-					stack.push((bu, st) => { msg.items[i] = bu.toString(); });
+					stack.push(...GetDeserializer(msg.items[i]));
 				} });
 
 retStack.push((buf, stack) => { msg.count = buf.readInt32LE(0); });;
