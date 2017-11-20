@@ -12,7 +12,7 @@ import {rule} from './rule';
 	console.log('hello world');
 
 	try {
-		rule();
+		//rule();
 		let key = crypto.randomBytes(16).toString('hex');
 		let name = `aaa-${key}`;
 		let cp = childProcess.spawn(`D:/work/nitra/nitra/bin/Debug/Stage1/Nitra.ClientServer.Server.exe`, [name], { shell: true, detached: true });
@@ -67,6 +67,9 @@ import {rule} from './rule';
 		pipe.out.next(prgData);
 		console.log("buffer sent", `length : ${prgData.buffer.byteLength}`, prgData.toString());
 
+		pipe.asyncOut.subscribe(x => {
+			console.log(x);
+		});
 
 	}
 	catch (e) {

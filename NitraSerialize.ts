@@ -13,7 +13,7 @@ export function Serialize(msg: Message): Buffer {
         }
         case 43: { // SolutionStartLoading_ClientMessage
             return SerializeMessage(msg.MsgId
-                , [SerializeInt32(msg.id.Value)
+                , [SerializeInt32(msg.id.Value) 
                     , SerializeString(msg.fullPath)]);
         }
         case 44: { // SolutionLoaded_ClientMessage

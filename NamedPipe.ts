@@ -1,7 +1,8 @@
 import * as net from 'net';
 import * as Rx from 'rxjs';
 import { Message } from './NitraMessages';
-import { DesFun, GetDeserializer } from './NitraDeserialize';
+import { GetDeserializer } from './NitraDeserialize';
+import { DesFun } from './deserializers';
 //import * as WW from 'typed-web-workers';
 import * as cp from 'child_process';
 var Threads = require('webworker-threads');
@@ -39,11 +40,11 @@ export function createPipe(name: string): { in: Rx.Observable<Message>, out: Rx.
 			});
 		});
 
-		let subjectAsyncOut = createAsyncResponse(asyncResponsePipe);
+		let subjectAsyncServerResponse = createAsyncResponse(asyncResponsePipe);
 
-		let subjectIn = createAsyncResponse(asyncResponsePipe);
+		let subjectServerResponce = createAsyncResponse(asyncResponsePipe);
 
-		return { in: subjectIn, out: subjectOut, asyncOut: subjectAsyncOut }
+		return { in: subjectServerResponce, out: subjectOut, asyncOut: subjectAsyncServerResponse }
 	}
 	catch (e) {
 		console.log("error!!! ", e);
