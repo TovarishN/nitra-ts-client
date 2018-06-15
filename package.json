@@ -11,9 +11,7 @@
   "dependencies": {
     "@types/node": "^8.0.47",
     "node-int64": "^0.4.0",
-    "rxjs": "^5.5.2",
-    "typed-web-workers": "^2.1.1",
-    "webworker-threads": "^0.7.13"
+    "rxjs": "^5.5.2"
   },
   "devDependencies": {}
 }

@@ -1,7 +1,6 @@
 import * as net from 'net';
 import * as Rx from 'rxjs';
 import * as Msg from './NitraMessages';
-import * as WW from 'typed-web-workers';
 import * as crypto from 'crypto';
 import * as childProcess from 'child_process';
 import { Serialize } from './NitraSerialize';
@@ -15,7 +14,7 @@ import {rule} from './rule';
 		//rule();
 		let key = crypto.randomBytes(16).toString('hex');
 		let name = `aaa-${key}`;
-		let cp = childProcess.spawn(`D:/work/nitra/nitra/bin/Debug/Stage1/Nitra.ClientServer.Server.exe`, [name], { shell: true, detached: true });
+		let cp = childProcess.spawn(`c:/work/nitra/bin/Debug/Stage1/Nitra.ClientServer.Server.exe`, [name], { shell: true, detached: true });
 		cp.on('close', (code, signal) => {
 			console.log(`closed ${code}, ${signal}`);
 		});
