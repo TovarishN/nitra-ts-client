@@ -54,7 +54,7 @@ import { createPipe } from './NamedPipe';
 				, Languages: [{
 					MsgId: 128
 					, Name: "AkkaExpressionLang"
-					, Path: "D:\\work\\olimpic\\akka-poc\\Sample.Grammar\\bin\\Debug\\akka_rule_parser.dll"
+					, Path: "C:\\work\\olimpic\\akka-poc\\Sample.Grammar\\bin\\Debug\\akka_rule_parser.dll"
 					, DynamicExtensions: []
 				}]
 				, References: []

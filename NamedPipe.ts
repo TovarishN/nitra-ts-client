@@ -87,7 +87,7 @@ function createResponsePipe(pipe: string): Rx.Observable<Message> {
 		}
 
 		if (funStack.length > 0) {
-			let buf = funStack.shift()(data, funStack);
+			funStack = funStack.shift()(data, funStack);
 		}
 
 		if (funStack.length == 0) {
