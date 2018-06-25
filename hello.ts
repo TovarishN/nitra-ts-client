@@ -1,11 +1,9 @@
-import * as net from 'net';
-import * as Rx from 'rxjs';
+import { Observable, timer } from 'rxjs';
 import * as Msg from './NitraMessages';
 import * as crypto from 'crypto';
 import * as childProcess from 'child_process';
 import { Serialize } from './NitraSerialize';
 import { createPipe } from './NamedPipe';
-import {rule} from './rule';
 
 (async function main() {
 	console.log('hello world');
@@ -20,18 +18,18 @@ import {rule} from './rule';
 		});
 		console.log(cp.pid, "spawned");
 
-		await Rx.Observable.timer(1000).toPromise();
+		await timer(1000).toPromise();
 
 		console.log('create pipes');
 		let pipe = createPipe(name);
 
-		pipe.in
-			//.scan((acc, buf, _index) => Buffer.concat([acc, buf]))
-			.subscribe(data => {
-				console.log(`async pipe subject ${data}`, data);
-			});
+		// pipe.syncOut
+		// 	//.scan((acc, buf, _index) => Buffer.concat([acc, buf]))
+		// 	.subscribe(data => {
+		// 		console.log(`async pipe subject ${data}`, data);
+		// 	});
 
-		let cv = <Msg.CheckVersion_ClientMessage>{ assemblyVersionGuid: "ae8f12fe-9286-4031-828a-f8371b0399bc", MsgId: 42 };
+		let cv = <Msg.CheckVersion_ClientMessage>{ assemblyVersionGuid: "76cd9b8c-5706-4ee3-ba38-0f47129322b1", MsgId: 42 };
 		let cvData = Serialize(cv);
 		pipe.out.next(cvData);
 		console.log("buffer sent", `length : ${cvData.buffer.byteLength}`, cvData.toString());

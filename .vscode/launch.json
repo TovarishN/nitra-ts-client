@@ -12,7 +12,6 @@
             "processId": "${command:PickProcess}",
             "remoteRoot": "/mnt/c/work/nitra-ts-client/",
             "localRoot": "${workspaceRoot}"
-
         },
         {
             "type": "node",
@@ -20,8 +19,11 @@
             "name": "Launch",
             "protocol": "inspector",
             //"remoteRoot": "/mnt/c/work/nitra-ts-client/",
-            //"localRoot": "${workspaceRoot}",
+            "localRoot": "${workspaceRoot}",
             "program": "${workspaceFolder}/hello.ts",
+            "outFiles": [
+                "${workspaceRoot}/output/**/*.js"
+            ],
             "sourceMaps": true
         }
     ]

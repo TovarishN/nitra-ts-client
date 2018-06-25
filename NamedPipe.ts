@@ -5,11 +5,11 @@ import { GetDeserializer } from './NitraDeserialize';
 import { DesFun } from './deserializers';
 //import * as WW from 'typed-web-workers';
 import * as cp from 'child_process';
-var Threads = require('webworker-threads');
+//var Threads = require('webworker-threads');
 
 let thread: any;
 
-export function createPipe(name: string): { in: Rx.Observable<Message>, out: Rx.Observer<Buffer>, asyncOut: Rx.Observable<Message> } {
+export function createPipe(name: string): { syncOut: Rx.Observable<Message>, out: Rx.Observer<Buffer>, asyncOut: Rx.Observable<Message> } {
 	try {
 		let pipeStr = `//./pipe/${name}`;
 		let responsePipe = `${pipeStr}-response`;
@@ -40,15 +40,15 @@ export function createPipe(name: string): { in: Rx.Observable<Message>, out: Rx.
 			});
 		});
 
-		let subjectAsyncServerResponse = createAsyncResponse(asyncResponsePipe);
+		let subjectAsyncServerResponse = createResponsePipe(asyncResponsePipe);
 
-		let subjectServerResponce = createAsyncResponse(asyncResponsePipe);
+		//let subjectServerResponce = createResponsePipe(responsePipe);
 
-		return { in: subjectServerResponce, out: subjectOut, asyncOut: subjectAsyncServerResponse }
+		return { syncOut: null, out: subjectOut, asyncOut: subjectAsyncServerResponse }
 	}
 	catch (e) {
 		console.log("error!!! ", e);
-		return { in: null, out: null, asyncOut: null };
+		return { syncOut: null, out: null, asyncOut: null };
 	}
 }
 
@@ -69,12 +69,13 @@ function connect(pipe: string): net.Socket {
 	return result;
 }
 
-function createAsyncResponse(pipe: string): Rx.Observable<Message> {
+function createResponsePipe(pipe: string): Rx.Observable<Message> {
 	let res = new Rx.Subject<Message>();
-	let asyncConn = connect(pipe);
-
+	
 	let curMsg: Message = null;
 	let funStack: DesFun[] = [];
+
+	let asyncConn = connect(pipe);
 
 	asyncConn.on('data', data => {
 		console.log("async receive: ", data.length, data);

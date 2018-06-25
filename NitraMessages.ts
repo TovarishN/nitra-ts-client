@@ -11,35 +11,42 @@ export type ObjectDescriptor = Ast_ObjectDescriptor | AstList_ObjectDescriptor |
 
 export type ContentDescriptor = AstItems_ContentDescriptor | Fail_ContentDescriptor | Items_ContentDescriptor | Members_ContentDescriptor;
 export type CompletionElem = Literal_CompletionElem | Symbol_CompletionElem;
-export type Message = CheckVersion_ClientMessage | SolutionStartLoading_ClientMessage | SolutionLoaded_ClientMessage | SolutionUnloaded_ClientMessage 
-                    | ProjectStartLoading_ClientMessage | ProjectLoaded_ClientMessage | ProjectUnloaded_ClientMessage | ProjectRename_ClientMessage 
-                    | ProjectReferenceLoaded_ClientMessage | ProjectReferenceUnloaded_ClientMessage | ReferenceLoaded_ClientMessage | ReferenceUnloaded_ClientMessage 
-                    | FileLoaded_ClientMessage | FileReparse_ClientMessage | FileUnloaded_ClientMessage | FileRenamed_ClientMessage | FileInMemoryLoaded_ClientMessage 
-                    | FileActivated_ClientMessage | FileDeactivated_ClientMessage | FileChanged_ClientMessage | FileChangedBatch_ClientMessage | PrettyPrint_ClientMessage 
-                    | CompleteWord_ClientMessage | CompleteWordDismiss_ClientMessage | FindSymbolReferences_ClientMessage | FindSymbolDefinitions_ClientMessage | ParseTreeReflection_ClientMessage 
-                    | GetObjectContent_ClientMessage | GetObjectGraph_ClientMessage | AttachDebugger_ClientMessage | GetLibsMetadata_ClientMessage | GetLibsSyntaxModules_ClientMessage 
-                    | GetLibsProjectSupports_ClientMessage | GetFileExtensions_ClientMessage | SetCaretPos_ClientMessage | GetHint_ClientMessage | GetSubHint_ClientMessage 
-                    | FindDeclarations_ClientMessage | Shutdown_ClientMessage | FindSymbolDefinitions_ServerMessage | FindSymbolReferences_ServerMessage 
-                    | ParseTreeReflection_ServerMessage | ObjectContent_ServerMessage | LibsMetadata_ServerMessage | LibsSyntaxModules_ServerMessage | LibsProjectSupports_ServerMessage 
-                    | FileExtensions_ServerMessage | SubHint_ServerMessage | LanguageLoaded_AsyncServerMessage | OutliningCreated_AsyncServerMessage | KeywordsHighlightingCreated_AsyncServerMessage 
-                    | MatchedBrackets_AsyncServerMessage | SymbolsHighlightingCreated_AsyncServerMessage | ProjectLoadingMessages_AsyncServerMessage | ParsingMessages_AsyncServerMessage 
-                    | MappingMessages_AsyncServerMessage | SemanticAnalysisMessages_AsyncServerMessage | SemanticAnalysisDone_AsyncServerMessage | PrettyPrintCreated_AsyncServerMessage 
-                    | ReflectionStructCreated_AsyncServerMessage | RefreshReferencesFailed_AsyncServerMessage | RefreshProjectFailed_AsyncServerMessage | FindSymbolReferences_AsyncServerMessage 
-                    | Hint_AsyncServerMessage | Exception_AsyncServerMessage | FoundDeclarations_AsyncServerMessage | CompleteWord_AsyncServerMessage | ProjectSupports | SyntaxModules 
-                    | LibMetadata | SymbolRreferences | NSpan | SpanInfo | Insert_FileChange | Delete_FileChange | Replace_FileChange | FileIdentity | FileEntries | Range | Location 
-                    | DeclarationInfo | SymbolLocation | CompilerMessage | ProjectSupport | Config | DynamicExtensionInfo | LanguageInfo | SpanClassInfo | OutliningInfo | Literal_CompletionElem 
-                    | Symbol_CompletionElem | ReflectionInfo | ParseTreeReflectionStruct | GrammarDescriptor | LibReference | Fail_ContentDescriptor | Members_ContentDescriptor 
-                    | Items_ContentDescriptor | AstItems_ContentDescriptor | Unknown_ObjectDescriptor | Null_ObjectDescriptor | NotEvaluated_ObjectDescriptor | Ast_ObjectDescriptor 
-                    | Symbol_ObjectDescriptor | Object_ObjectDescriptor | AstList_ObjectDescriptor | Seq_ObjectDescriptor | String_ObjectDescriptor | Int16_ObjectDescriptor 
-                    | Int32_ObjectDescriptor | Int64_ObjectDescriptor | Char_ObjectDescriptor | SByte_ObjectDescriptor | UInt16_ObjectDescriptor | UInt32_ObjectDescriptor 
-                    | UInt64_ObjectDescriptor | Byte_ObjectDescriptor | Single_ObjectDescriptor | Double_ObjectDescriptor | Boolean_ObjectDescriptor | Parsed_ObjectDescriptor 
-                    | PropertyDescriptor | MatchBrackets | VersionedPos;
-export enum PrettyPrintState { Disabled,Text, Html }
-export enum CompilerMessageSource { ProjectLoading,Parsing, Mapping, SemanticAnalysis }
-export enum CompilerMessageType { FatalError,Error, Warning, Hint }
-export enum ReflectionKind { Normal,Recovered, Ambiguous, Deleted }
-export enum PropertyKind { Simple,DependentIn, DependentOut, DependentInOut, Ast }
-
+export type Message = CheckVersion_ClientMessage | SolutionStartLoading_ClientMessage | SolutionLoaded_ClientMessage | SolutionUnloaded_ClientMessage
+| ProjectStartLoading_ClientMessage | ProjectLoaded_ClientMessage | ProjectUnloaded_ClientMessage | ProjectRename_ClientMessage
+| ProjectReferenceLoaded_ClientMessage | ProjectReferenceUnloaded_ClientMessage | ReferenceLoaded_ClientMessage | ReferenceUnloaded_ClientMessage
+| FileLoaded_ClientMessage | FileReparse_ClientMessage | FileUnloaded_ClientMessage | FileRenamed_ClientMessage
+| FileInMemoryLoaded_ClientMessage | FileActivated_ClientMessage | FileDeactivated_ClientMessage | FileChanged_ClientMessage
+| FileChangedBatch_ClientMessage | PrettyPrint_ClientMessage | CompleteWord_ClientMessage | CompleteWordDismiss_ClientMessage
+| FindSymbolReferences_ClientMessage | FindSymbolDefinitions_ClientMessage | ParseTreeReflection_ClientMessage | GetObjectContent_ClientMessage
+| GetObjectGraph_ClientMessage | AttachDebugger_ClientMessage | GetLibsMetadata_ClientMessage | GetLibsSyntaxModules_ClientMessage
+| GetLibsProjectSupports_ClientMessage | GetFileExtensions_ClientMessage | SetCaretPos_ClientMessage | GetHint_ClientMessage
+| GetSubHint_ClientMessage | FindDeclarations_ClientMessage | Shutdown_ClientMessage | FindSymbolDefinitions_ServerMessage
+| FindSymbolReferences_ServerMessage | ParseTreeReflection_ServerMessage | ObjectContent_ServerMessage | LibsMetadata_ServerMessage
+| LibsSyntaxModules_ServerMessage | LibsProjectSupports_ServerMessage | FileExtensions_ServerMessage | SubHint_ServerMessage
+| LanguageLoaded_AsyncServerMessage | OutliningCreated_AsyncServerMessage | KeywordsHighlightingCreated_AsyncServerMessage | MatchedBrackets_AsyncServerMessage
+| SymbolsHighlightingCreated_AsyncServerMessage | ProjectLoadingMessages_AsyncServerMessage | ParsingMessages_AsyncServerMessage | MappingMessages_AsyncServerMessage
+| SemanticAnalysisMessages_AsyncServerMessage | SemanticAnalysisDone_AsyncServerMessage | PrettyPrintCreated_AsyncServerMessage | ReflectionStructCreated_AsyncServerMessage
+| RefreshReferencesFailed_AsyncServerMessage | RefreshProjectFailed_AsyncServerMessage | FindSymbolReferences_AsyncServerMessage | Hint_AsyncServerMessage
+| Exception_AsyncServerMessage | FoundDeclarations_AsyncServerMessage | CompleteWord_AsyncServerMessage | ProjectSupports
+| SyntaxModules | LibMetadata | SymbolRreferences | NSpan
+| SpanInfo | Insert_FileChange | Delete_FileChange | Replace_FileChange
+| FileIdentity | FileEntries | Range | Location
+| DeclarationInfo | SymbolLocation | CompilerMessage | ProjectSupport
+| Config | DynamicExtensionInfo | LanguageInfo | SpanClassInfo
+| OutliningInfo | Literal_CompletionElem | Symbol_CompletionElem | ReflectionInfo
+| ParseTreeReflectionStruct | GrammarDescriptor | LibReference | Fail_ContentDescriptor
+| Members_ContentDescriptor | Items_ContentDescriptor | AstItems_ContentDescriptor | Unknown_ObjectDescriptor
+| Null_ObjectDescriptor | NotEvaluated_ObjectDescriptor | Ast_ObjectDescriptor | Symbol_ObjectDescriptor
+| Object_ObjectDescriptor | AstList_ObjectDescriptor | Seq_ObjectDescriptor | String_ObjectDescriptor
+| Int16_ObjectDescriptor | Int32_ObjectDescriptor | Int64_ObjectDescriptor | Char_ObjectDescriptor
+| SByte_ObjectDescriptor | UInt16_ObjectDescriptor | UInt32_ObjectDescriptor | UInt64_ObjectDescriptor
+| Byte_ObjectDescriptor | Single_ObjectDescriptor | Double_ObjectDescriptor | Boolean_ObjectDescriptor
+| Parsed_ObjectDescriptor | PropertyDescriptor | MatchBrackets | VersionedPos;
+export enum PrettyPrintState { Disabled, Text, Html }
+export enum CompilerMessageSource { ProjectLoading, Parsing, Mapping, SemanticAnalysis }
+export enum CompilerMessageType { FatalError, Error, Warning, Hint }
+export enum ReflectionKind { Normal, Recovered, Ambiguous, Deleted }
+export enum PropertyKind { Simple, DependentIn, DependentOut, DependentInOut, Ast }
 export interface CheckVersion_ClientMessage { MsgId: 42; assemblyVersionGuid: string; }
 export interface SolutionStartLoading_ClientMessage { MsgId: 43; id: SolutionId; fullPath: string; }
 export interface SolutionLoaded_ClientMessage { MsgId: 44; id: SolutionId; }
