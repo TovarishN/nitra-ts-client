@@ -25,7 +25,7 @@ retStack.push((buf, stack) => { msg.id = { Value: buf.readInt32LE(0) }; return s
 case 46: { // ProjectStartLoading_ClientMessage
 retStack.push((buf, stack) => { msg.id = { Value: buf.readInt32LE(0) }; return stack; });
 retStack.push((buf, stack) => StringDeserializer(buf, stack, (str:string) => { msg.fullPath = str; }, () => { return msg.fullPath; })); 
-msg.config = cast<Msg.Config>(<Msg.Message>{ MsgId: 46 }); retStack.push(...GetDeserializer(msg.config));
+msg.config = cast<Msg.Config>(<Msg.Message>{ MsgId: 126 }); retStack.push(...GetDeserializer(msg.config));
  return retStack;
 }
 case 47: { // ProjectLoaded_ClientMessage
@@ -108,7 +108,7 @@ case 61: { // FileChanged_ClientMessage
 retStack.push((buf, stack) => { msg.id = { Value: buf.readInt32LE(0) }; return stack; });
 retStack.push((buf, stack) => { msg.version = { Value: buf.readInt32LE(0) }; return stack; });
 retStack.push(...GetDeserializer(msg.change));
-msg.caretPos = cast<Msg.VersionedPos>(<Msg.Message>{ MsgId: 61 }); retStack.push(...GetDeserializer(msg.caretPos));
+msg.caretPos = cast<Msg.VersionedPos>(<Msg.Message>{ MsgId: 165 }); retStack.push(...GetDeserializer(msg.caretPos));
  return retStack;
 }
 case 62: { // FileChangedBatch_ClientMessage
@@ -124,7 +124,7 @@ retStack.push((buf,stack) => {
 	return stack;
 });
 
-msg.caretPos = cast<Msg.VersionedPos>(<Msg.Message>{ MsgId: 62 }); retStack.push(...GetDeserializer(msg.caretPos));
+msg.caretPos = cast<Msg.VersionedPos>(<Msg.Message>{ MsgId: 165 }); retStack.push(...GetDeserializer(msg.caretPos));
  return retStack;
 }
 case 63: { // PrettyPrint_ClientMessage
@@ -146,13 +146,13 @@ retStack.push((buf, stack) => { msg.id = { Value: buf.readInt32LE(0) }; return s
 case 66: { // FindSymbolReferences_ClientMessage
 retStack.push((buf, stack) => { msg.projectId = { Value: buf.readInt32LE(0) }; return stack; });
 retStack.push((buf, stack) => { msg.fileId = { Value: buf.readInt32LE(0) }; return stack; });
-msg.pos = cast<Msg.VersionedPos>(<Msg.Message>{ MsgId: 66 }); retStack.push(...GetDeserializer(msg.pos));
+msg.pos = cast<Msg.VersionedPos>(<Msg.Message>{ MsgId: 165 }); retStack.push(...GetDeserializer(msg.pos));
  return retStack;
 }
 case 67: { // FindSymbolDefinitions_ClientMessage
 retStack.push((buf, stack) => { msg.projectId = { Value: buf.readInt32LE(0) }; return stack; });
 retStack.push((buf, stack) => { msg.fileId = { Value: buf.readInt32LE(0) }; return stack; });
-msg.pos = cast<Msg.VersionedPos>(<Msg.Message>{ MsgId: 67 }); retStack.push(...GetDeserializer(msg.pos));
+msg.pos = cast<Msg.VersionedPos>(<Msg.Message>{ MsgId: 165 }); retStack.push(...GetDeserializer(msg.pos));
  return retStack;
 }
 case 68: { // ParseTreeReflection_ClientMessage
@@ -235,13 +235,13 @@ retStack.push((buf,stack) => {
 case 76: { // SetCaretPos_ClientMessage
 retStack.push((buf, stack) => { msg.projectId = { Value: buf.readInt32LE(0) }; return stack; });
 retStack.push((buf, stack) => { msg.fileId = { Value: buf.readInt32LE(0) }; return stack; });
-msg.pos = cast<Msg.VersionedPos>(<Msg.Message>{ MsgId: 76 }); retStack.push(...GetDeserializer(msg.pos));
+msg.pos = cast<Msg.VersionedPos>(<Msg.Message>{ MsgId: 165 }); retStack.push(...GetDeserializer(msg.pos));
  return retStack;
 }
 case 77: { // GetHint_ClientMessage
 retStack.push((buf, stack) => { msg.projectId = { Value: buf.readInt32LE(0) }; return stack; });
 retStack.push((buf, stack) => { msg.fileId = { Value: buf.readInt32LE(0) }; return stack; });
-msg.pos = cast<Msg.VersionedPos>(<Msg.Message>{ MsgId: 77 }); retStack.push(...GetDeserializer(msg.pos));
+msg.pos = cast<Msg.VersionedPos>(<Msg.Message>{ MsgId: 165 }); retStack.push(...GetDeserializer(msg.pos));
  return retStack;
 }
 case 78: { // GetSubHint_ClientMessage
@@ -271,7 +271,7 @@ case 80: { // Shutdown_ClientMessage
 }
 case 81: { // FindSymbolDefinitions_ServerMessage
 retStack.push((buf, stack) => { msg.solutionId = { Value: buf.readInt32LE(0) }; return stack; });
-msg.referenceSpan = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 81 }); retStack.push(...GetDeserializer(msg.referenceSpan))
+msg.referenceSpan = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 113 }); retStack.push(...GetDeserializer(msg.referenceSpan))
 
 retStack.push((buf,stack) => {
 	let length = buf.readInt32LE(0);
@@ -287,7 +287,7 @@ retStack.push((buf,stack) => {
 }
 case 82: { // FindSymbolReferences_ServerMessage
 retStack.push((buf, stack) => { msg.solutionId = { Value: buf.readInt32LE(0) }; return stack; });
-msg.referenceSpan = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 82 }); retStack.push(...GetDeserializer(msg.referenceSpan))
+msg.referenceSpan = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 113 }); retStack.push(...GetDeserializer(msg.referenceSpan))
 
 retStack.push((buf,stack) => {
 	let length = buf.readInt32LE(0);
@@ -564,7 +564,7 @@ case 101: { // ReflectionStructCreated_AsyncServerMessage
 retStack.push((buf, stack) => { msg.FileId = { Value: buf.readInt32LE(0) }; return stack; });
 retStack.push((buf, stack) => { msg.Version = { Value: buf.readInt32LE(0) }; return stack; });
 retStack.push((buf, stack) => { msg.SolutionId = { Value: buf.readInt32LE(0) }; return stack; });
-msg.root = cast<Msg.ParseTreeReflectionStruct>(<Msg.Message>{ MsgId: 101 }); retStack.push(...GetDeserializer(msg.root));
+msg.root = cast<Msg.ParseTreeReflectionStruct>(<Msg.Message>{ MsgId: 134 }); retStack.push(...GetDeserializer(msg.root));
  return retStack;
 }
 case 102: { // RefreshReferencesFailed_AsyncServerMessage
@@ -585,7 +585,7 @@ case 104: { // FindSymbolReferences_AsyncServerMessage
 retStack.push((buf, stack) => { msg.FileId = { Value: buf.readInt32LE(0) }; return stack; });
 retStack.push((buf, stack) => { msg.Version = { Value: buf.readInt32LE(0) }; return stack; });
 retStack.push((buf, stack) => { msg.SolutionId = { Value: buf.readInt32LE(0) }; return stack; });
-msg.referenceSpan = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 104 }); retStack.push(...GetDeserializer(msg.referenceSpan))
+msg.referenceSpan = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 113 }); retStack.push(...GetDeserializer(msg.referenceSpan))
 
 retStack.push((buf,stack) => {
 	let length = buf.readInt32LE(0);
@@ -604,7 +604,7 @@ retStack.push((buf, stack) => { msg.FileId = { Value: buf.readInt32LE(0) }; retu
 retStack.push((buf, stack) => { msg.Version = { Value: buf.readInt32LE(0) }; return stack; });
 retStack.push((buf, stack) => { msg.SolutionId = { Value: buf.readInt32LE(0) }; return stack; });
 retStack.push((buf, stack) => StringDeserializer(buf, stack, (str:string) => { msg.text = str; }, () => { return msg.text; })); 
-msg.referenceSpan = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 105 }); retStack.push(...GetDeserializer(msg.referenceSpan));
+msg.referenceSpan = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 113 }); retStack.push(...GetDeserializer(msg.referenceSpan));
  return retStack;
 }
 case 106: { // Exception_AsyncServerMessage
@@ -636,7 +636,7 @@ case 108: { // CompleteWord_AsyncServerMessage
 retStack.push((buf, stack) => { msg.FileId = { Value: buf.readInt32LE(0) }; return stack; });
 retStack.push((buf, stack) => { msg.Version = { Value: buf.readInt32LE(0) }; return stack; });
 retStack.push((buf, stack) => { msg.SolutionId = { Value: buf.readInt32LE(0) }; return stack; });
-msg.replacementSpan = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 108 }); retStack.push(...GetDeserializer(msg.replacementSpan))
+msg.replacementSpan = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 113 }); retStack.push(...GetDeserializer(msg.replacementSpan))
 
 retStack.push((buf,stack) => {
 	let length = buf.readInt32LE(0);
@@ -732,7 +732,7 @@ retStack.push((buf, stack) => { msg.EndPos = buf.readInt32LE(0); return stack; }
  return retStack;
 }
 case 114: { // SpanInfo
-msg.Span = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 114 }); retStack.push(...GetDeserializer(msg.Span))
+msg.Span = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 113 }); retStack.push(...GetDeserializer(msg.Span))
 retStack.push((buf, stack) => { msg.SpanClassId = buf.readInt32LE(0); return stack; });;
  return retStack;
 }
@@ -742,11 +742,11 @@ retStack.push((buf, stack) => StringDeserializer(buf, stack, (str:string) => { m
  return retStack;
 }
 case 116: { // Delete_FileChange
-msg.span = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 116 }); retStack.push(...GetDeserializer(msg.span));
+msg.span = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 113 }); retStack.push(...GetDeserializer(msg.span));
  return retStack;
 }
 case 117: { // Replace_FileChange
-msg.span = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 117 }); retStack.push(...GetDeserializer(msg.span))
+msg.span = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 113 }); retStack.push(...GetDeserializer(msg.span))
 retStack.push((buf, stack) => StringDeserializer(buf, stack, (str:string) => { msg.text = str; }, () => { return msg.text; })); ;
  return retStack;
 }
@@ -756,7 +756,7 @@ retStack.push((buf, stack) => { msg.FileVersion = { Value: buf.readInt32LE(0) };
  return retStack;
 }
 case 119: { // FileEntries
-msg.File = cast<Msg.FileIdentity>(<Msg.Message>{ MsgId: 119 }); retStack.push(...GetDeserializer(msg.File))
+msg.File = cast<Msg.FileIdentity>(<Msg.Message>{ MsgId: 118 }); retStack.push(...GetDeserializer(msg.File))
 
 retStack.push((buf,stack) => {
 	let length = buf.readInt32LE(0);
@@ -771,7 +771,7 @@ retStack.push((buf,stack) => {
  return retStack;
 }
 case 122: { // Range
-msg.Span = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 122 }); retStack.push(...GetDeserializer(msg.Span))
+msg.Span = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 113 }); retStack.push(...GetDeserializer(msg.Span))
 retStack.push((buf, stack) => { msg.StartLine = buf.readInt32LE(0); return stack; });
 retStack.push((buf, stack) => { msg.StartColumn = buf.readInt32LE(0); return stack; });
 retStack.push((buf, stack) => { msg.EndLine = buf.readInt32LE(0); return stack; });
@@ -780,8 +780,8 @@ retStack.push((buf, stack) => StringDeserializer(buf, stack, (str:string) => { m
  return retStack;
 }
 case 123: { // Location
-msg.File = cast<Msg.FileIdentity>(<Msg.Message>{ MsgId: 123 }); retStack.push(...GetDeserializer(msg.File))
-msg.Range = cast<Msg.Range>(<Msg.Message>{ MsgId: 123 }); retStack.push(...GetDeserializer(msg.Range));
+msg.File = cast<Msg.FileIdentity>(<Msg.Message>{ MsgId: 118 }); retStack.push(...GetDeserializer(msg.File))
+msg.Range = cast<Msg.Range>(<Msg.Message>{ MsgId: 122 }); retStack.push(...GetDeserializer(msg.Range));
  return retStack;
 }
 case 120: { // DeclarationInfo
@@ -801,20 +801,20 @@ retStack.push((buf,stack) => {
 retStack.push((buf, stack) => StringDeserializer(buf, stack, (str:string) => { msg.FullName = str; }, () => { return msg.FullName; })); 
 retStack.push((buf, stack) => StringDeserializer(buf, stack, (str:string) => { msg.Kind = str; }, () => { return msg.Kind; })); 
 retStack.push((buf, stack) => { msg.SpanClassId = buf.readInt32LE(0); return stack; });
-msg.Location = cast<Msg.Location>(<Msg.Message>{ MsgId: 120 }); retStack.push(...GetDeserializer(msg.Location));
+msg.Location = cast<Msg.Location>(<Msg.Message>{ MsgId: 123 }); retStack.push(...GetDeserializer(msg.Location));
  return retStack;
 }
 case 121: { // SymbolLocation
 retStack.push((buf, stack) => { msg.SymbolId = buf.readInt32LE(0); return stack; });
-msg.Location = cast<Msg.Location>(<Msg.Message>{ MsgId: 121 }); retStack.push(...GetDeserializer(msg.Location));
+msg.Location = cast<Msg.Location>(<Msg.Message>{ MsgId: 123 }); retStack.push(...GetDeserializer(msg.Location));
  return retStack;
 }
 case 124: { // CompilerMessage
 retStack.push((buf, stack) => { msg.Type = <Msg.CompilerMessageType>buf.readInt32LE(0); return stack;});
-msg.Location = cast<Msg.Location>(<Msg.Message>{ MsgId: 124 }); retStack.push(...GetDeserializer(msg.Location))
+msg.Location = cast<Msg.Location>(<Msg.Message>{ MsgId: 123 }); retStack.push(...GetDeserializer(msg.Location))
 retStack.push((buf, stack) => StringDeserializer(buf, stack, (str:string) => { msg.Text = str; }, () => { return msg.Text; })); 
 retStack.push((buf, stack) => { msg.Number = buf.readInt32LE(0); return stack; });
-retStack.push((buf, stack) => { msg.Source = <Msg.CompilerMessageSource>buf.readInt32LE(0); return stack;});
+retStack.push((buf, stack) => { msg.Source = <Msg.CompilerMessageSource>buf.readInt8(0); return stack;});
 
 retStack.push((buf,stack) => {
 	let length = buf.readInt32LE(0);
@@ -835,7 +835,7 @@ retStack.push((buf, stack) => StringDeserializer(buf, stack, (str:string) => { m
  return retStack;
 }
 case 126: { // Config
-msg.ProjectSupport = cast<Msg.ProjectSupport>(<Msg.Message>{ MsgId: 126 }); retStack.push(...GetDeserializer(msg.ProjectSupport))
+msg.ProjectSupport = cast<Msg.ProjectSupport>(<Msg.Message>{ MsgId: 125 }); retStack.push(...GetDeserializer(msg.ProjectSupport))
 
 retStack.push((buf,stack) => {
 	let length = buf.readInt32LE(0);
@@ -887,7 +887,7 @@ retStack.push((buf, stack) => { msg.ForegroundColor = buf.readInt32LE(0); return
  return retStack;
 }
 case 130: { // OutliningInfo
-msg.Span = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 130 }); retStack.push(...GetDeserializer(msg.Span))
+msg.Span = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 113 }); retStack.push(...GetDeserializer(msg.Span))
 retStack.push((buf, stack) => { msg.IsDefaultCollapsed = buf.readUInt8(0)[0] === 1; return stack; });
 retStack.push((buf, stack) => { msg.IsImplementation = buf.readUInt8(0)[0] === 1; return stack; });;
  return retStack;
@@ -913,10 +913,10 @@ retStack.push((buf, stack) => { msg.CanParseEmptyString = buf.readUInt8(0)[0] ==
  return retStack;
 }
 case 134: { // ParseTreeReflectionStruct
-msg.info = cast<Msg.ReflectionInfo>(<Msg.Message>{ MsgId: 134 }); retStack.push(...GetDeserializer(msg.info))
+msg.info = cast<Msg.ReflectionInfo>(<Msg.Message>{ MsgId: 133 }); retStack.push(...GetDeserializer(msg.info))
 retStack.push((buf, stack) => StringDeserializer(buf, stack, (str:string) => { msg.description = str; }, () => { return msg.description; })); 
 retStack.push((buf, stack) => { msg.kind = <Msg.ReflectionKind>buf.readInt32LE(0); return stack;});
-msg.span = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 134 }); retStack.push(...GetDeserializer(msg.span))
+msg.span = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 113 }); retStack.push(...GetDeserializer(msg.span))
 
 retStack.push((buf,stack) => {
 	let length = buf.readInt32LE(0);
@@ -1007,7 +1007,7 @@ case 143: { // NotEvaluated_ObjectDescriptor
  return retStack;
 }
 case 144: { // Ast_ObjectDescriptor
-msg.span = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 144 }); retStack.push(...GetDeserializer(msg.span))
+msg.span = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 113 }); retStack.push(...GetDeserializer(msg.span))
 retStack.push((buf, stack) => { msg.id = buf.readInt32LE(0); return stack; });
 retStack.push((buf, stack) => StringDeserializer(buf, stack, (str:string) => { msg.str = str; }, () => { return msg.str; })); 
 retStack.push((buf, stack) => StringDeserializer(buf, stack, (str:string) => { msg.typeName = str; }, () => { return msg.typeName; })); 
@@ -1063,7 +1063,7 @@ retStack.push((buf,stack) => {
  return retStack;
 }
 case 147: { // AstList_ObjectDescriptor
-msg.span = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 147 }); retStack.push(...GetDeserializer(msg.span))
+msg.span = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 113 }); retStack.push(...GetDeserializer(msg.span))
 retStack.push((buf, stack) => { msg.id = buf.readInt32LE(0); return stack; });
 
 retStack.push((buf,stack) => {
@@ -1157,7 +1157,7 @@ retStack.push((buf, stack) => { msg.value = buf.readUInt8(0)[0] === 1; return st
  return retStack;
 }
 case 162: { // Parsed_ObjectDescriptor
-msg.span = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 162 }); retStack.push(...GetDeserializer(msg.span))
+msg.span = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 113 }); retStack.push(...GetDeserializer(msg.span))
 retStack.push(...GetDeserializer(msg.value));;
  return retStack;
 }
@@ -1168,8 +1168,8 @@ retStack.push(...GetDeserializer(msg.Object));;
  return retStack;
 }
 case 164: { // MatchBrackets
-msg.Open = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 164 }); retStack.push(...GetDeserializer(msg.Open))
-msg.Close = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 164 }); retStack.push(...GetDeserializer(msg.Close));
+msg.Open = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 113 }); retStack.push(...GetDeserializer(msg.Open))
+msg.Close = cast<Msg.NSpan>(<Msg.Message>{ MsgId: 113 }); retStack.push(...GetDeserializer(msg.Close));
  return retStack;
 }
 case 165: { // VersionedPos

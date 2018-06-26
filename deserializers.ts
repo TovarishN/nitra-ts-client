@@ -36,9 +36,13 @@ export function StringDeserializer(buf, stack, setter : (str: string) => void, g
 	let lenFun = ((buf:Buffer, stack:DesFun[], length: number, shift: number) => {
 		let len = buf.readInt8(0);
 		length = length | (len & 0x7f) << shift;
-		if((len & 0x80) != 0){
+        if((len & 0x80) != 0){
 			stack.push((buf: Buffer, stack: DesFun[]) => lenFun(buf, stack, length, shift + 7));
-		}
+        }
+        else if(len == 0 && shift == 0)
+        {
+            stack = prevStack;
+        }
 		else {
 			stack.push((buf, st) => strFun(buf, st, length));
         }

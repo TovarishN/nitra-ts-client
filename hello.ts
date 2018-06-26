@@ -21,22 +21,19 @@ import { createPipe } from './NamedPipe';
 		await timer(1000).toPromise();
 
 		console.log('create pipes');
-		let pipe = createPipe(name);
+		let pipe = await createPipe(name);
 
-		// pipe.syncOut
-		// 	//.scan((acc, buf, _index) => Buffer.concat([acc, buf]))
-		// 	.subscribe(data => {
-		// 		console.log(`async pipe subject ${data}`, data);
-		// 	});
+		pipe.syncResponse.subscribe(x => { console.log(x); });
+		pipe.asyncResponse.subscribe(x => { console.log(x); });
 
 		let cv = <Msg.CheckVersion_ClientMessage>{ assemblyVersionGuid: "76cd9b8c-5706-4ee3-ba38-0f47129322b1", MsgId: 42 };
 		let cvData = Serialize(cv);
-		pipe.out.next(cvData);
+		pipe.syncRequest.next(cvData);
 		console.log("buffer sent", `length : ${cvData.buffer.byteLength}`, cvData.toString());
 
 		let sol = <Msg.SolutionStartLoading_ClientMessage>{ id: { Value: 1 }, fullPath: 'D:\\work\\nitratest\\New suite\\test-0000', MsgId: 43 };
 		let solData = Serialize(sol);
-		pipe.out.next(solData);
+		pipe.syncRequest.next(solData);
 		console.log("buffer sent", `length : ${solData.buffer.byteLength}`, solData.toString());
 
 		let prg = <Msg.ProjectStartLoading_ClientMessage>{
@@ -61,13 +58,18 @@ import { createPipe } from './NamedPipe';
 			}
 		};
 		let prgData = Serialize(prg);
-		pipe.out.next(prgData);
+		pipe.syncRequest.next(prgData);
 		console.log("buffer sent", `length : ${prgData.buffer.byteLength}`, prgData.toString());
 
-		pipe.asyncOut.subscribe(x => {
-			console.log(x);
-		});
+		let file = <Msg.FileLoaded_ClientMessage> {
+			MsgId: 54,
+			fullPath: "C:\\work\\nitratest\\New suite\\test-0000\\test-0000\\test-0000.test",
+			projectId: { Value : 2 },
+			version: { Value : 1 },
+			id: { Value : 1 }
+		};
 
+		pipe.syncRequest.next(Serialize(file));
 	}
 	catch (e) {
 		console.log("error!!! ", e);
