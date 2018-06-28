@@ -5,6 +5,12 @@ import * as childProcess from 'child_process';
 import { Serialize } from './NitraSerialize';
 import { createPipe } from './NamedPipe';
 
+type Unpacked<T> =
+    T extends (infer U)[] ? U :
+    T extends (...args: any[]) => infer U ? U :
+    T extends Promise<infer U> ? U :
+    T;
+
 (async function main() {
 	console.log('hello world');
 
@@ -17,8 +23,6 @@ import { createPipe } from './NamedPipe';
 			console.log(`closed ${code}, ${signal}`);
 		});
 		console.log(cp.pid, "spawned");
-
-		await timer(1000).toPromise();
 
 		console.log('create pipes');
 		let pipe = await createPipe(name);
@@ -61,12 +65,12 @@ import { createPipe } from './NamedPipe';
 		pipe.syncRequest.next(prgData);
 		console.log("buffer sent", `length : ${prgData.buffer.byteLength}`, prgData.toString());
 
-		let file = <Msg.FileLoaded_ClientMessage> {
+		let file = <Msg.FileLoaded_ClientMessage>{
 			MsgId: 54,
 			fullPath: "C:\\work\\nitratest\\New suite\\test-0000\\test-0000\\test-0000.test",
-			projectId: { Value : 2 },
-			version: { Value : 1 },
-			id: { Value : 1 }
+			projectId: { Value: 2 },
+			version: { Value: 1 },
+			id: { Value: 1 }
 		};
 
 		pipe.syncRequest.next(Serialize(file));

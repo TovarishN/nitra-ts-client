@@ -1,12 +1,15 @@
 import * as net from 'net';
 import * as Rx from 'rxjs';
+import { Observable, timer } from 'rxjs';
 import { Message } from './NitraMessages';
 import { GetDeserializer } from './NitraDeserialize';
 import { DesFun } from './deserializers';
 
-export async function createPipe(name: string): Promise <{ syncResponse: Rx.Observable<Message>
-											, asyncResponse: Rx.Observable<Message>
-											, syncRequest: Rx.Observer<Buffer> }> {
+export async function createPipe(name: string): Promise<{
+	syncResponse: Rx.Observable<Message>
+	, asyncResponse: Rx.Observable<Message>
+	, syncRequest: Rx.Observer<Buffer>
+}> {
 	try {
 		let pipeStr = `//./pipe/${name}`;
 		let responsePipe = `${pipeStr}-response`;
@@ -37,17 +40,22 @@ export async function createPipe(name: string): Promise <{ syncResponse: Rx.Obse
 async function connect(pipe: string): Promise<net.Socket> {
 	let socket = net.connect(pipe, () => { console.log(`${pipe} connection listener!`); });
 	return new Promise<net.Socket>((resolve, reject) => {
-		socket.on('connect', () => { resolve(socket); })
+		socket.on('connect', () => { resolve(socket); });
+		socket.on('error', (ex) => {
+			resolve();
+		});
 	});
 }
 
 async function createResponsePipe(pipe: string): Promise<Rx.Observable<Message>> {
 	let res = new Rx.Subject<Message>();
-	
+
 	let curMsg: Message = null;
 	let funStack: DesFun[] = [];
 
 	let conn = await connect(pipe);
+	if(!conn)
+		throw new Error('connection failure');
 
 	conn.on('data', data => {
 		//console.log("async receive: ", data.length, data);
